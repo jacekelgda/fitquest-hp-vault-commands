@@ -10,7 +10,7 @@ class ListHPCommand {
   }
 
   init () {
-    this.slack.on('/listHP', async (msg, bot) => {
+    this.slack.on('/listhp', async (msg, bot) => {
       try {
         let message = 'HP Vault: \n';
 

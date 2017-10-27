@@ -18,11 +18,11 @@ provider:
     CLIENT_ID: ${file(./serverless.env.yml):dev.SLACK_CLIENT_ID}
     CLIENT_SECRET: ${file(./serverless.env.yml):dev.SLACK_CLIENT_SECRET}
     CLIENT_SCOPES: ${file(./serverless.env.yml):dev.SLACK_CLIENT_SCOPES}
-    INSTALL_REDIRECT: ${file(./serverless.env.yml):dev.SLACK_INSTALL_REDIRECT}
     VERIFICATION_TOKEN: ${file(./serverless.env.yml):dev.SLACK_VERIFICATION_TOKEN}
     ENABLE_LOGGING: ${file(./serverless.env.yml):dev.SLACK_ENABLE_LOGGING}
     SLACK_ADMINS: ${file(./serverless.env.yml):dev.SLACK_ADMINS}
     SLACK_BOT_USER_OAUTH_ACCESS_TOKEN: ${file(./serverless.env.yml):dev.SLACK_BOT_USER_OAUTH_ACCESS_TOKEN}
+    TABLE_NAME: ${file(./serverless.env.yml):dev.SLACK_TABLE_NAME}
 
 functions:
   slack:
@@ -35,3 +35,22 @@ functions:
           integration: lambda
           response:
             template: $input.path('$')
+
+resources:
+  Resources:
+    TeamsDynamoDbTable:
+      Type: 'AWS::DynamoDB::Table'
+      DeletionPolicy: Retain
+      Properties:
+        AttributeDefinitions:
+          -
+            AttributeName: id
+            AttributeType: S
+        KeySchema:
+          -
+            AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TableName: ${file(./serverless.env.yml):dev.SLACK_TABLE_NAME}

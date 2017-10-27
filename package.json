@@ -21,7 +21,8 @@
     "build": "rm -fr build && babel ./src -d build",
     "deploy": "npm run build && serverless deploy",
     "codedeploy": "npm run build && serverless deploy function -f slack",
-    "test": "jest"
+    "test": "jest",
+    "logs": "serverless logs -f slack -t"
   },
   "repository": {
     "type": "git",
