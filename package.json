@@ -1,0 +1,47 @@
+{
+  "name": "hp-vault-slash-cmd",
+  "description": "",
+  "version": "0.0.1",
+  "author": "jacekelgda",
+  "homepage": "https://github.com/jacekelgda/fitquest-hp-vault-commands",
+  "license": "MIT",
+  "keywords": [
+    "slack",
+    "app",
+    "bot",
+    "aws",
+    "lambda",
+    "x-team",
+    "serverless",
+    "fit-quest",
+    "hp-vault"
+  ],
+  "scripts": {
+    "eslint": "./node_modules/.bin/eslint src/**/*.js --fix",
+    "build": "rm -fr build && babel ./src -d build",
+    "deploy": "npm run build && serverless deploy",
+    "codedeploy": "npm run build && serverless deploy function -f slack",
+    "test": "jest",
+    "logs": "serverless logs -f slack -t"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jacekelgda/fitquest-hp-vault-commands"
+  },
+  "bugs": {
+    "url": "https://github.com/jacekelgda/fitquest-hp-vault-commands/issues"
+  },
+  "dependencies": {
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "request": "^2.83.0",
+    "request-promise": "^4.2.2",
+    "serverless-slack": "^1.0.25",
+    "slack-node": "^0.1.8"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-latest": "^6.24.1",
+    "eslint": "^4.9.0",
+    "jest": "^21.2.1"
+  }
+}
