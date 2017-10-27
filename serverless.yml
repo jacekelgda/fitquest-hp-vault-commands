@@ -23,6 +23,7 @@ provider:
     SLACK_ADMINS: ${file(./serverless.env.yml):dev.SLACK_ADMINS}
     SLACK_BOT_USER_OAUTH_ACCESS_TOKEN: ${file(./serverless.env.yml):dev.SLACK_BOT_USER_OAUTH_ACCESS_TOKEN}
     TABLE_NAME: ${file(./serverless.env.yml):dev.SLACK_TABLE_NAME}
+    HP_API_ENDPOINT: ${file(./serverless.env.yml):dev.HP_API_ENDPOINT}
 
 functions:
   slack:

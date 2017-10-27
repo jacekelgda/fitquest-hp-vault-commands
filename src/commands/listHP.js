@@ -12,24 +12,12 @@ class ListHPCommand {
   init () {
     this.slack.on('/listhp', async (msg, bot) => {
       try {
-        let message = 'HP Vault: \n';
-
+        let message = '';
         if (isAdmin(msg.user_name)) {
-          try {
-              const data = await this.hpService.getAll();
-          } catch (e) {
-              bot.replyPrivate(e);
-              return;
+          const data = await this.hpService.getAll();
+          for (let i = 0; i < data.length; i += 1) {
+            message += `${data[i].userName} - ${data[i].hp} \n`;
           }
-
-          for (const index in data) {
-            message += `\n${data[index].name} - ${data[index].coins}`;
-          }
-        } else {
-          const data = await this.coinsService.get(msg.user_id);
-          const coins = data ? data.coins : 0;
-
-          message = `You have ${coins} :coin:`;
         }
 
         bot.replyPrivate(message);
