@@ -1,5 +1,4 @@
 const isAdmin = require('../utils/isAdmin');
-const { extractMentionedUsers } = require('../utils/extractMentionedUsers');
 
 class ListHPCommand {
   constructor (slack, hpService) {

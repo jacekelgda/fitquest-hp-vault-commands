@@ -15,14 +15,11 @@ class InitHPProfilesCommand {
         try {
           const slackUsers = await this.slackApi.getTeamUsers();
           const activeUsers = this.slackApi.filterActiveUsers(slackUsers);
-          for (let i = 0; i < activeUsers.length; i += 1) {
-            const data = {
-              slackid: activeUsers[i].id,
-              slackusername: activeUsers[i].name
-            }
-            await this.hp.create(data);
-            bot.replyPrivate(`Created ${activeUsers[i].name}\n`);
-          }
+          const data = this.slackApi.reduceToData(activeUsers);
+          console.log(data.length);
+          // send all payload
+          await this.hp.createAll(data);
+
           bot.replyPrivate('Done!');
         } catch (error) {
           console.log(error);

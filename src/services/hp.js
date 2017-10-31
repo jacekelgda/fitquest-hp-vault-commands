@@ -6,7 +6,17 @@ class HpService {
 
   create (data) {
     const options = {
-      uri: this.url,
+      uri: `${this.url}/healthpoints`,
+      method: 'POST',
+      json: true,
+      body: data
+    };
+    return this.rp(options);
+  }
+
+  createAll (data) {
+    const options = {
+      uri: `${this.url}/init`,
       method: 'POST',
       json: true,
       body: data
@@ -16,7 +26,7 @@ class HpService {
 
   getAll () {
     const options = {
-        uri: this.url,
+        uri: `${this.url}/healthpoints`,
         json: true
     };
     return this.rp(options);

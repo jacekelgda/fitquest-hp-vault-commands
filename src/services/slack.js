@@ -30,6 +30,22 @@ class SlackApiService {
 
     return activeUsers
   }
+
+  reduceToData (members) {
+    let data = [];
+    for (let i = 0; i < members.length; i += 1) {
+        const userData = members[i];
+        if (!userData.is_bot && !userData.deleted && !userData.is_restricted) {
+            const item = {
+              slackid: userData.id,
+              slackusername: userData.name
+            };
+            data.push(item);
+        }
+    }
+
+    return data;
+  }
 }
 
 module.exports = SlackApiService;
