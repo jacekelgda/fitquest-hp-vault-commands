@@ -31,6 +31,20 @@ class HpService {
     };
     return this.rp(options);
   }
+
+  addHP (data) {
+    const options = {
+      uri: `${this.url}/healcmd`,
+      method: 'POST',
+      json: true,
+      body: data
+    };
+    return this.rp(options);
+  }
+
+  removeHP () {
+
+  }
 }
 
 module.exports = HpService;

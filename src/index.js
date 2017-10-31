@@ -9,6 +9,8 @@ const HpService = require('./services/hp');
 const SlackApiService = require('./services/slack');
 const ListHPCommand = require('./commands/listHP');
 const InitHPProfilesCommand = require('./commands/initHP');
+const AddHPCommand = require('./commands/addHP');
+const RemoveHPCommand = require('./commands/removeHP');
 
 exports.handler = slack.handler.bind(slack);
 
@@ -17,3 +19,5 @@ const slackApi = new SlackApiService(sc);
 
 new ListHPCommand(slack, hp);
 new InitHPProfilesCommand(slack, hp, slackApi);
+new AddHPCommand(slack, hp);
+new RemoveHPCommand(slack, hp);
