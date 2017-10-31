@@ -10,15 +10,17 @@ class AddHPCommand {
   }
 
   init () {
-    this.slack.on('/addhp', async (msg, bot) => {
+    this.slack.on('/fitquest-add-hp', async (msg, bot) => {
       try {
         console.log(msg);
         let message = 'Adding 1HP';
         if (isAdmin(msg.user_name)) {
             const mentionedUser = extractMentionedUser(msg.text);
-            console.log(mentionedUser);
             bot.replyPrivate(`${message} to @${mentionedUser.userName}`);
-            this.hpService.addHP(mentionedUser);
+            const response = await this.hpService.addHP(mentionedUser);
+            console.log('Response:', response);
+        } else {
+          bot.replyPrivate('Access denied');
         }
       } catch (error) {
         bot.replyPrivate('Whoops! An Error occured!');
