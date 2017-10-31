@@ -9,7 +9,7 @@ class ListHPCommand {
   }
 
   init () {
-    this.slack.on('/listhp', async (msg, bot) => {
+    this.slack.on('/fitquest-list-hp', async (msg, bot) => {
       try {
         let message = '';
         if (isAdmin(msg.user_name)) {
@@ -17,9 +17,10 @@ class ListHPCommand {
           for (let i = 0; i < data.length; i += 1) {
             message += `${data[i].userName} - ${data[i].hp} \n`;
           }
+          bot.replyPrivate(message);
+        } else {
+          bot.replyPrivate('Access denied');
         }
-
-        bot.replyPrivate(message);
       } catch (error) {
         bot.replyPrivate('Whoops! An Error occured!');
       }

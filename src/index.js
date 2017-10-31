@@ -11,6 +11,7 @@ const ListHPCommand = require('./commands/listHP');
 const InitHPProfilesCommand = require('./commands/initHP');
 const AddHPCommand = require('./commands/addHP');
 const RemoveHPCommand = require('./commands/removeHP');
+const GetHPCommand = require('./commands/getHP');
 
 exports.handler = slack.handler.bind(slack);
 
@@ -21,3 +22,4 @@ new ListHPCommand(slack, hp);
 new InitHPProfilesCommand(slack, hp, slackApi);
 new AddHPCommand(slack, hp);
 new RemoveHPCommand(slack, hp);
+new GetHPCommand(slack, hp);

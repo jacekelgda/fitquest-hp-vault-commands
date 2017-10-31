@@ -24,6 +24,15 @@ class HpService {
     return this.rp(options);
   }
 
+  get(id) {
+    const options = {
+        uri: `${this.url}/healthpoints/${id}`,
+        method: 'GET',
+        json: true
+    };
+    return this.rp(options);
+  }
+
   getAll () {
     const options = {
         uri: `${this.url}/healthpoints`,
@@ -42,8 +51,14 @@ class HpService {
     return this.rp(options);
   }
 
-  removeHP () {
-
+  removeHP (data) {
+    const options = {
+      uri: `${this.url}/hitcmd`,
+      method: 'POST',
+      json: true,
+      body: data
+    };
+    return this.rp(options);
   }
 }
 

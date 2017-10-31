@@ -25,8 +25,8 @@ class InitHPProfilesCommand {
           console.log(error);
           bot.replyPrivate('Whoops! An Error occured!');
         }
-      } else {
-        bot.replyPrivate('You don\'t have a permission to do that!');
+      }  else {
+        bot.replyPrivate('Access denied');
       }
     });
   }
