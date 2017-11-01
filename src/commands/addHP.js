@@ -12,17 +12,25 @@ class AddHPCommand {
   init () {
     this.slack.on('/fitquest-add-hp', async (msg, bot) => {
       try {
-        console.log(msg);
-        let message = 'Adding 1HP';
         if (isAdmin(msg.user_name)) {
             const mentionedUser = extractMentionedUser(msg.text);
-            bot.replyPrivate(`${message} to @${mentionedUser.userName}`);
-            const response = await this.hpService.addHP(mentionedUser);
-            console.log('Response:', response);
+            bot.replyPrivate(`Adding 1HP to @${mentionedUser.userName} ...`);
+            let notify = true;
+            const response = await this.hpService.addHP(mentionedUser)
+              .catch((error) => {
+                if (error.response.body === 'ConditionalCheckFailedException') {
+                  bot.replyPrivate(`@${mentionedUser.userName} max HP reached.`);
+                }
+                notify = false;
+              });
+            if (notify) {
+              bot.replyPrivate(`${response.Attributes.userName} has now ${response.Attributes.hp}HP.`);
+            }
         } else {
           bot.replyPrivate('Access denied');
         }
       } catch (error) {
+        console.log('Add HP Exception:', error);
         bot.replyPrivate('Whoops! An Error occured!');
       }
     });
